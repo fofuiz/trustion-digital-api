@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	
+	<!-- SPRING BOOT -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.9.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	
+	
+	<!-- INFO - PROJECT -->
+	<groupId>br.com.trustion.digital</groupId>
+	<artifactId>trustion-digital-api</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+	<name>trustion-digital-api</name>
+	<description>Servicos de cartoes digitais</description>
+
+
+	<!-- PROPERTIES -->
+	<properties>
+		<java.version>1.8</java.version>
+		<start-class>br.com.trustion.digital.TrustionDigitalApiApplication</start-class>
+		<spring.oauth2.autoconfigure.version>2.1.9.RELEASE</spring.oauth2.autoconfigure.version>
+		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+		<spring-boot.version>2.1.9.RELEASE</spring-boot.version>
+		<spring-boot-admin.version>2.1.3</spring-boot-admin.version>
+	</properties>
+	
+	
+	<!-- DEPENDENCY MANAGEMENT -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+	<!-- DEPENDENCIES -->
+	<dependencies>
+	
+		<!-- Spring - Web + Jetty-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jetty</artifactId>
+		</dependency>
+		
+		
+		<!-- Spring Cloud + Vault -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-vault-config</artifactId>
+		</dependency>
+		
+		
+		<!-- Spring Security + OAuth2 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.security.oauth.boot</groupId>
+		    <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+		    <version>${spring.oauth2.autoconfigure.version}</version>
+		</dependency>
+		
+		
+		<!-- Spring Data + JPA + BD -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+		    <groupId>org.postgresql</groupId>
+		    <artifactId>postgresql</artifactId>
+		</dependency>
+		
+		
+		<!-- Spring Boot Admin + Actuator + Swagger -->
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-client</artifactId>
+			<version>${spring-boot-admin.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>2.9.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		
+		
+		<!-- Utils + Lombok -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-java8</artifactId>
+		</dependency>
+		
+		
+		<!-- Spring DevTools + Test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+	</dependencies>
+
+
+	<!-- BUILD -->
+	<build>
+		<plugins>
+			
+			<!-- PLUGIN SPRING BOOT - DEFAULT -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			
+		</plugins>
+	</build>
+	
+	
+	<!-- REPOSITORIES ACCESSTAGE -->
+	<repositories>
+		<repository>
+			<id>Maven Central</id>
+			<name>Maven Central</name>
+			<url>http://nexus-prd1.accesstage.com.br/nexus/content/repositories/central/</url>
+		</repository>
+		<repository>
+			<id>Maven Apache</id>
+			<name>Maven Apache</name>
+			<url>http://nexus-prd1.accesstage.com.br/nexus/content/repositories/maven.apache/</url>
+		</repository>
+		<repository>
+			<id>Accesstage Release</id>
+			<name>Accesstage Release</name>
+			<url>http://nexus-prd1.accesstage.com.br/nexus/content/repositories/releases/</url>
+		</repository>
+		<repository>
+			<id>Accesstage Snapshots</id>
+			<name>Accesstage Snapshots</name>
+			<url>http://nexus-prd1.accesstage.com.br/nexus/content/repositories/snapshots/</url>
+		</repository>
+	</repositories>
+
+</project>

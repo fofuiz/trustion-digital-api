@@ -1,0 +1,23 @@
+pipeline_template: pipeline/maven/jenkinsfile
+docker:
+   baseImage: java-generic-oraclelinux
+kubernetes:
+  namespace: l2-backend-trustion-digital
+  containerPort: 8080
+  nodePort: 31688 
+  healthCheck: /trustion-digital-api/actuator/health
+  resources:
+    requests:
+      memory: "150Mi"
+      cpu: "100m"
+    limits:
+      memory: "320Mi"
+      cpu: "2000m"
+  env:
+    jvmMemory: -Xmx64m -Xms64m
+    jvmGcConf: -XX:SurvivorRatio=4 -XX:TargetSurvivorRatio=90 -XX:MinHeapFreeRatio=25
+    jvmConfig: -XX:+UnlockExperimentalVMOptions -XX:ActiveProcessorCount=2 -Xss256k
+    jvmSecurity: -Djava.security.egd=file:/dev/./urandom
+  replicas: 1
+  mountData: true
+  configVault: true

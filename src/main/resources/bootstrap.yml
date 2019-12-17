@@ -1,0 +1,67 @@
+# Ref: https://confluence.accesstage.com.br/display/TD/bootstrap.yml
+ 
+# Spring Properties - Global
+server:
+  port: 8080
+  servlet:
+    context-path: /trustion-digital-api
+ 
+spring:
+  application:
+    name: trustion-digital-api
+  profiles:
+    active: local
+  cloud:
+    config:
+      name: trustion-digital-api,commons-spring-boot-admin,commons-hagrid-pooling
+      uri: ${hiker_hagrid_URL:http://hiker-hagrid.l4-applicationsupport-coffer.svc.cluster.local:8080}
+    vault:
+      token:  ${VAULT_TOKEN:0273f66f-4067-e623-df7a-152eb30eeeaf}
+      host:   ${VAULT_SERVER:vault-dev.accesstage.com.br}
+      port:   ${VAULT_PORT:8200}
+      scheme: ${VAULT_SCHEME:http}
+      generic:
+        enabled: true
+        application-name: jdbc/postgresql/dbsuperdigital
+
+
+
+# Environment - Local
+---
+spring:
+  profiles: local
+  boot:
+    admin:
+      client:
+        url: "http://kb-dev-master1.accesstage.com.br:30700/"
+        instance:
+          prefer-ip: true
+  cloud:
+    config:
+      uri: http://kb-dev-master1.accesstage.com.br:30002
+logging:
+  level:
+    br: DEBUG
+
+
+
+# Environment - Development
+---
+spring:
+  profiles: develop
+
+
+
+# Environment - Homologação
+---
+spring:
+  profiles: homolog
+
+
+
+# Environment - Produção
+---
+spring:
+  profiles: prod
+
+
